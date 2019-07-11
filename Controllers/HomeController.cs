@@ -30,5 +30,13 @@ namespace EchartsDemo.Controllers
         }
 
 
+        public IActionResult Report()
+        {
+
+
+            return View();
+        }
+
+
     }
 }

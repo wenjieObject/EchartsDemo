@@ -1,16 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.EntityFrameworkCore;
-using Oracle.ManagedDataAccess;
 
 namespace EchartsDemo
 {
@@ -22,8 +18,12 @@ namespace EchartsDemo
         }
 
         public IConfiguration Configuration { get; }
+
+        //配置autofac
+        public static IContainer AutofacContainer;
+
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
+        public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             services.Configure<CookiePolicyOptions>(options =>
             {
@@ -35,6 +35,17 @@ namespace EchartsDemo
             services.Configure<ConnectionStrings>(Configuration.GetSection("ConnectionStrings"));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            //注册服务进 IServiceCollection
+            ContainerBuilder builder = new ContainerBuilder();
+            //将services中的服务填充到Autofac中.
+            builder.Populate(services);
+            //新模块组件注册
+            builder.RegisterModule<DefaultModuleRegister>();
+            //创建容器.
+            AutofacContainer = builder.Build();
+            //使用容器创建 AutofacServiceProvider 
+            return new AutofacServiceProvider(AutofacContainer);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

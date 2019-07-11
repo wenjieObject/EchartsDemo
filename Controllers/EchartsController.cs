@@ -70,7 +70,18 @@ namespace EchartsDemo.Controllers
             return Json(new { total = total, rows = rows });
         }
 
+        public ActionResult IntervalFunc()
+        {
+            var sqlStr = " select  * from bdta_material where rownum<100 ";
+            var count = sqlHelper.GetDataTable(sqlStr);
+
+            return null;
+        }
+
     }
+
+
+
 
 
     public class TestData

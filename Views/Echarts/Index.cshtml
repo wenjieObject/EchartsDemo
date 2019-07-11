@@ -6,6 +6,8 @@
 
 
 <div id="main" style="width: 600px;height:400px;"></div>
+<div id="Intervalblock" style="width: 600px;height:400px; background-color:red"></div>
+
 <script src="~/lib/jquery/dist/jquery.js"></script>
 @section Scripts{
     <script type="text/javascript">
@@ -43,7 +45,6 @@
             url: "Echarts/GetTestData",    //请求发送到TestServlet处
             dataType: "json",        //返回数据形式为json
             success: function (result) {
-                debugger;
                 //请求成功时执行该函数内容，result即为服务器返回的json对象
                 if (result) {
                     for (var i = 0; i < result.length; i++) {

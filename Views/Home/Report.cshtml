@@ -1,0 +1,72 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+
+    <!--head中引入-->
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+    <!-- 可选的Bootstrap主题文件（一般不用引入） -->
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap-theme.min.css">
+    <style>
+        body {
+            background-image: url('http://www.lonwin.net/uploads/allimg/161207/1-16120G50G33F.jpg');
+            background-color: #ffffff;
+            background-size: 100%;
+            background-repeat: no-repeat;
+        }
+    </style>
+    <meta name="viewport" content="width=device-width" />
+    <title>Report</title>
+
+
+</head>
+<body style="height:100%;width:100%">
+    <h1 style="text-align:right"><span id="timeNow">获取时间...</span></h1>
+    <h1 style="text-align:center">MES一车间实时统计</h1>
+
+    <div class="container" style="height:450px;width:100%">
+        <div class="row" style="height:10%">
+            <div class="col-xs-4" style="height:100%;text-align:center"><h3>倒拉达成率</h3></div>
+            <div class="col-xs-4" style="height:100%;text-align:center"><h3>大拉达成率</h3></div>
+            <div class="col-xs-4" style="height:100%;text-align:center"><h3>中拉达成率</h3></div>
+        </div>
+
+        <div class="row" style="height:100%">
+            <div class="col-xs-4" style="height:100%;"></div>
+            <div class="col-xs-4" style="height:100%;"></div>
+            <div class="col-xs-4" style="height:100%;background-color:lightblue"></div>
+        </div>
+
+    </div>
+
+
+
+
+    <!--body结尾-->
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+
+    <script src="~/js/echarts.min.js"></script>
+    <script>
+
+
+
+        $(function () {
+
+            var timer = setInterval(function () {
+                var myDate = new Date();
+                $("#timeNow").html(myDate.toLocaleTimeString());
+            }, 1000);//每一秒轮询一次
+        })
+
+    </script>
+</body>
+</html>
